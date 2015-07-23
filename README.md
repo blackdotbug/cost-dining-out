@@ -10,12 +10,14 @@ This is where the image files for the show will exist. Any image file format wil
 # Intro.html
 This is where you add slides to the show. The first slide container begins on line 74. Each section must have a unique id. 
 
-# <section id="slide1" class="image" data-autoslide="25000">
+# the section tag
+< section id="slide1" class="image" data-autoslide="25000" >
 The first slide id is slide1. We can increment the slide id numbers with each slide, so the second slide id should be slide2, the third slide id should be slide3, etc.
 The class attribute links this section to the style definition titled "image" in the theme's css. This should not be changed. 
 The data-autoslide attribute determines in milliseconds how long the slide should be displayed if autoplay is turned on. 
 
-# <img width="1060" height="530" src="slides/slide1.png"  alt="slide1" >
+# the img tag
+< img width="1060" height="530" src="slides/slide1.png"  alt="slide1" >
 Each slide section contains an image tag. 
 Set the width and height attributes to match the dimensions of your slide image. 
 Set the source (src) attribute to the location and filename of the image for this slide.
