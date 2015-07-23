@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+			<!-------------------------------------------------------------------------->
+			<!--     PREDICT 455 - The Show                                           -->
+			<!--    																  -->
+			<!--      by:  Abby Dexter, Eric Hansen, Eli Nelson,  and Heather Ohana   -->
+			<!--                                                                      -->
+			<!--      This web show was developed utilizing the reveal.js framework   -->
+			<!--      developed by Hakim El Hattab.                                   -->
+			<!--      ref:  http://lab.hakim.se/reveal-js/).                          -->
+			<!-------------------------------------------------------------------------->
+
+		<title>The Cost of Dining Out</title>
+
+		<meta name="description" content="Intro">
+		<meta name="author" content="Predict455">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides navigate-right">
+				
+				<section id="title" >
+					<section id="title_first" data-autoslide="0">
+						
+						<h2>The Cost of Dining Out</h2>
+						<h3>Data Visualization</h3>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>
+						<ul>
+						<li>To start the presentation, click the <strong><a href="#/slide1">down </a></strong> arrow in the lower right corner.</li>
+				
+						<li>To view the overall presentation framework, press <strong>ESC.</strong></li>
+						<li>Press the <strong>Play</strong> button to begin autoplay.</li>
+						</ul>
+				</section>
+				
+				<!-- slide 1: set width and height to match image dimensions, set src to filename -->
+				<!-- copy everything in the section tag and edit section id and img attributes for each additional slide -->
+
+				<section id="slide1" class="image" data-autoslide="25000">
+					<a>
+				<img width="1060" height="530" src="slides/slide1.png"  alt="slide1" >
+					</a>
+				</section>
+				
+				<section id="slide2" data-autoslide="10000">
+					<a>
+						<img width="1000" height="575" src="slides/slide2.png"  alt="slide2" >
+					</a>
+				</section>
+							
+					
+			<section id="lastslide" data-autoslide="10000" data-transition="fade">
+				<h4>
+				Press <strong>ESC</strong> to enter the slide overview, 
+				</h4>
+				<h4>
+				or click the Play button and return to the beginning.
+				</h4>
+			</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				// Display controls in the bottom right corner
+				controls: true,
+
+				// Display a presentation progress bar
+				progress: true,
+
+				// Display the page number of the current slide
+				slideNumber: true,
+
+				// Push each slide change to the browser history
+				history: true,
+
+				// Enable the slide overview mode
+				overview: true,
+
+				// Vertical centering of slides
+				center: true,
+
+				// Turns fragments on and off globally
+				fragments: true,
+
+				// Number of milliseconds between automatically proceeding to the
+				// next slide, disabled when set to 0, this value can be overwritten
+				// by using a data-autoslide attribute on your slides
+				autoSlide: 15000,
+
+				// Stop auto-sliding after user input
+				autoSlideStoppable: true,				
+				
+				// Number of slides away from the current that are visible
+				viewDistance: 3,
+					// Display the page number of the current slide
+				slideNumber: true,
+				
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
