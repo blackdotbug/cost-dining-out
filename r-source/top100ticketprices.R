@@ -101,17 +101,63 @@ major18cities$dinnersoutperweek <- round(major18cities$dinnersoutperyear / 52, 0
 # add column for total food expenditures
 major18cities$totalfoodexp <- major18cities$foodaway + major18cities$foodathome
 
+# add column for total food and alcohol expenditures
+major18cities$totalfoodalc <- major18cities$totalfoodexp + major18cities$alcohol
+
+#add column for food away plus alcohol
+major18cities$foodawayalcohol <- major18cities$foodaway + major18cities$alcohol
+
+#add column for percent of average pretax income is food away plus alcohol
+major18cities$foodalcperinc <- major18cities$foodawayalcohol / major18cities$pretaxincome
+
+major18cities$city[major18cities$foodalcperinc == min(major18cities$foodalcperinc)]
+major18cities$city[major18cities$foodalcperinc == max(major18cities$foodalcperinc)]
+
+major18cities$city[major18cities$dinnersoutperyear == min(major18cities$dinnersoutperyear)]
+major18cities$city[major18cities$dinnersoutperyear == max(major18cities$dinnersoutperyear)]
+
+major18cities$city[major18cities$perfoodawaypretaxinc == min(major18cities$perfoodawaypretaxinc)]
+major18cities$city[major18cities$perfoodawaypretaxinc == max(major18cities$perfoodawaypretaxinc)]
+
+major18cities$city[major18cities$foodalcperinc == min(major18cities$foodalcperinc)]
+major18cities$city[major18cities$foodalcperinc == max(major18cities$foodalcperinc)]
+
+
+
 # load libraries to plot things
 library("ggplot2")
 library("scales")
 library("grid")
 
+
 # bubble plot comparing ticket price and population rank, showing population density
-png(filename="plot1.png", bg="transparent", width=800, height=500, units="px")
-ggplot(major18cities, aes(major18cities$ticketrank, major18cities$poprank)) + geom_point(aes(colour=major18cities$region, fill=major18cities$region, size=major18cities$density2014), shape=21) + theme_bw() + scale_x_continuous(name="Average Restaurant Ticket Rank") + scale_y_continuous(name="Population Rank") + scale_size("Pop. Density\nppl/sq.mile", range=c(4,20), breaks=c(0,5000,10000,15000,20000,25000,30000)) + geom_text(aes(label=major18cities$city), size=4, hjust=-.15, vjust=-.15) + guides(colour = guide_legend(override.aes = list(shape = 15, size = 10))) + scale_fill_brewer("Region", type="qual", palette=3) + scale_colour_brewer("Region", type="qual", palette=3) + geom_text(aes(label=sprintf("$%s",major18cities$totalaveticket)), size=4, hjust=-.15, vjust=1.05) + theme(panel.margin=unit(7, "in"), panel.border=element_blank())
+plot1 <- ggplot(major18cities, aes(major18cities$ticketrank, major18cities$poprank)) + geom_point(aes(colour=major18cities$region, fill=major18cities$region, size=major18cities$density2014), shape=21) + theme_bw() + scale_x_continuous(name="Average Restaurant Ticket Rank") + scale_y_continuous(name="Population Rank") + scale_size("Pop. Density\nppl/sq.mile", range=c(4,20), breaks=c(0,5000,10000,15000,20000,25000,30000)) + geom_text(aes(label=major18cities$city), size=4, hjust=-.15, vjust=-.15) + guides(colour = guide_legend(override.aes = list(shape = 15, size = 10))) + scale_fill_brewer("Region", type="qual", palette=3) + scale_colour_brewer("Region", type="qual", palette=3) + geom_text(aes(label=sprintf("$%s",major18cities$totalaveticket)), size=4, hjust=-.15, vjust=1.05) + theme(panel.margin=unit(7, "in"), panel.border=element_blank())
+
+png(filename="plot1.png", bg="transparent", width=1100, height=500, units="px")
+plot1
 dev.off()
 
 # bar plot of average spent on food away from home in 18 major cities, colored by region
-png(filename="plot2.png", bg="transparent", width=800, height=500, units="px")
-ggplot(major18cities, aes(reorder(major18cities$city,major18cities$foodaway), major18cities$foodaway, fill=major18cities$region)) + geom_bar(stat="identity") + labs(x="", y="")+theme(legend.title=element_blank(), axis.text.x = element_blank(), axis.ticks = element_blank(), panel.background = element_blank(), panel.grid.major.y = element_line(colour="#9f9c9c"), panel.grid.minor.y = element_line(colour="#9f9c9c")) + scale_x_discrete(breaks=NULL) + scale_y_continuous(labels=dollar) + geom_text(aes(label=major18cities$city, angle=90, hjust=1.1)) + scale_fill_brewer(type="qual", palette=3)
+plot2 <- ggplot(major18cities, aes(reorder(major18cities$city,major18cities$foodaway), major18cities$foodaway, fill=major18cities$region)) + geom_bar(stat="identity") + labs(x="", y="")+theme(legend.title=element_blank(), axis.text.x = element_blank(), axis.ticks = element_blank(), panel.background = element_blank(), panel.grid.major.y = element_line(colour="#9f9c9c"), panel.grid.minor.y = element_line(colour="#9f9c9c")) + scale_x_discrete(breaks=NULL) + scale_y_continuous(labels=dollar) + geom_text(aes(label=major18cities$city, angle=90, hjust=1.1)) + scale_fill_brewer(type="qual", palette=3)
+
+png(filename="plot2.png", bg="transparent", width=900, height=500, units="px")
+plot2
 dev.off()
+
+# bar plot of food expenditures in 18 major cities, stacked, colored by expenditure type
+plot3 <- ggplot(major18cities) +
+  geom_bar(aes(reorder(major18cities$city,major18cities$totalfoodalc), major18cities$totalfoodalc, fill="food\nat home"), stat="identity", position="stack") +
+  geom_bar(aes(reorder(major18cities$city,major18cities$totalfoodalc), major18cities$foodawayalcohol, fill="food away\nfrom home"), stat="identity", position="dodge") +
+  geom_bar(aes(reorder(major18cities$city,major18cities$totalfoodalc), major18cities$alcohol, fill="alcohol"), stat="identity", position="dodge") +
+  labs(x="", y="") +
+  theme(legend.title=element_blank(), axis.text.x=element_blank(), axis.ticks=element_blank(), panel.background=element_blank(), panel.grid.major.y=element_line(colour="#9f9c9c"), panel.grid.minor.y=element_line(colour="#9f9c9c")) +
+  scale_x_discrete(breaks=NULL) +
+  scale_y_continuous(labels=dollar) +
+  geom_text(aes(reorder(major18cities$city,major18cities$totalfoodalc), major18cities$totalfoodalc, label=major18cities$city, angle=90, hjust=1.1)) +
+  scale_fill_brewer(type="qual", palette=4)
+
+png(filename="plot3.png", bg="transparent", width=900, height=500, units="px")
+plot3
+dev.off()
+
+
