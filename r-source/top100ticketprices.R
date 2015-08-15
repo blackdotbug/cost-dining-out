@@ -160,4 +160,8 @@ png(filename="plot3.png", bg="transparent", width=900, height=500, units="px")
 plot3
 dev.off()
 
+# plot average income and restaurant ticket price
+cols <- brewer_pal(type="seq", palette=3)
+myPalette <- gradient_n_pal(cols)(seq(0, 1, length = 30))
+ggplot(major18cities) + geom_point(aes(major18cities$totalaveticket, major18cities$pretaxincome, fill=major18cities$foodalcperinc, colour=major18cities$foodalcperinc, size=major18cities$density2014), alpha=0.75)+ scale_x_continuous(name="Average Total Restaurant Ticket", labels=dollar) + scale_y_continuous(name="Average Pretax Income", labels=dollar) + scale_size("Pop. Density\nppl/sq.mile", range=c(4,20), breaks=c(0,5000,10000,15000,20000,25000,30000)) + geom_text(aes(major18cities$totalaveticket, major18cities$pretaxincome, label=major18cities$city), size=4, vjust=1.95) + scale_fill_gradientn("Percent of income\non food & alcohol",colours = myPalette, labels=percent) + scale_colour_gradientn("Percent of income\non food & alcohol",colours = myPalette, labels=percent) + theme(panel.margin=unit(7, "in"), panel.border=element_blank()) + theme_bw()
 
