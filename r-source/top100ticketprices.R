@@ -6,7 +6,7 @@ library(rvest)
 RestaurantTicketTop100 <- read.csv("~/Sites/cost-dining-out/cost-dining-out/r-source/RestaurantTicketTop100.csv")
 cityfoodexpenditures <- read.csv("~/Sites/cost-dining-out/cost-dining-out/r-source/cityfoodexpenditures.csv")
 
-# scape the wikipedia page for list of US cities by population
+# scrape the wikipedia page for list of US cities by population
 url <- "https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population"
 wikipopulation <- url %>%
   html() %>%
